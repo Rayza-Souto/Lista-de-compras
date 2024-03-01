@@ -11,7 +11,7 @@ export default function List() {
   }, [produtos]); // Executar o efeito sempre que a lista de produtos for atualizada
 
   const adicionarProduto = () => {
-    setProdutos([...produtos, { id: nextId++, nome: nome }]);
+    setProdutos([...produtos, { id: nextId++, nome: nome }]); // adiciona os itens na lista
     setNome(""); // Limpa o campo de entrada depois de adicionar o produto
   };
 
