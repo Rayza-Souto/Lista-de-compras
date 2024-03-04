@@ -5,6 +5,7 @@ let nextId = 0;
 export default function List() {
   const [nome, setNome] = useState("");
   const [produtos, setProdutos] = useState([]);
+  const [produtosSelecionados, setProdutosSelecionados] = useState([]);
 
   useEffect(() => {
     ordenarProdutos(); // Ordenar os produtos sempre que a lista de produtos for atualizada
@@ -28,18 +29,41 @@ export default function List() {
     setProdutos(produtosOrdenados);
   };
 
+  const handleCheckboxChange = (id) => {
+    if (produtosSelecionados.includes(id)) {
+      setProdutosSelecionados(produtosSelecionados.filter((item) => item !== id));
+    } else {
+      setProdutosSelecionados([...produtosSelecionados, id]);
+    }
+  };
+
+  const deletarProdutosSelecionados = () => {
+    const novosProdutos = produtos.filter((produto) => !produtosSelecionados.includes(produto.id));
+    setProdutos(novosProdutos);
+    setProdutosSelecionados([]);
+  };
+
+
   return (
     <>
       <h1>Lista de compras</h1>
       <input
         value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        onChange={(e) => setNome(e.target.value)} //(parameter) e: React.ChangeEvent<HTMLInputElement>
         onKeyDown={handleKeyDown}
       />
       <button onClick={adicionarProduto}>Adicionar</button>
+      <button onClick={deletarProdutosSelecionados}>Deletar</button>
       <ul>
         {produtos.map((produto) => (
-          <li key={produto.id}>{produto.nome}</li>
+          <li key={produto.id}>
+           <input
+              type="checkbox"
+              checked={produtosSelecionados.includes(produto.id)}
+              onChange={() => handleCheckboxChange(produto.id)}
+            />
+            {produto.nome} 
+            </li>
         ))}
       </ul>
     </>
