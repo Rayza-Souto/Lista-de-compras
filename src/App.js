@@ -38,9 +38,9 @@ export default function List() {
   };
 
   const deletarProdutosSelecionados = () => {
-    const novosProdutos = produtos.filter((produto) => !produtosSelecionados.includes(produto.id));
-    setProdutos(novosProdutos);
-    setProdutosSelecionados([]);
+    const novosProdutos = produtos.filter((produto) => !produtosSelecionados.includes(produto.id)); //cria um novo array com os produtos que não foram selecionados
+    setProdutos(novosProdutos); //atualzia a lista de produtos
+    setProdutosSelecionados([]); //limpa a lista de produtos selecionados
   };
 
 
