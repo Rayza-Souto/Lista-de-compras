@@ -30,10 +30,10 @@ export default function List() {
   };
 
   const handleCheckboxChange = (id) => {
-    if (produtosSelecionados.includes(id)) {
-      setProdutosSelecionados(produtosSelecionados.filter((item) => item !== id));
+    if (produtosSelecionados.includes(id)) { //verifica se o produto já está selecionado
+      setProdutosSelecionados(produtosSelecionados.filter((item) => item !== id)); //remove o produto da lista de produtos selecionados
     } else {
-      setProdutosSelecionados([...produtosSelecionados, id]);
+      setProdutosSelecionados([...produtosSelecionados, id]);//mantem o produto na lista
     }
   };
 
@@ -41,6 +41,14 @@ export default function List() {
     const novosProdutos = produtos.filter((produto) => !produtosSelecionados.includes(produto.id)); //cria um novo array com os produtos que não foram selecionados
     setProdutos(novosProdutos); //atualzia a lista de produtos
     setProdutosSelecionados([]); //limpa a lista de produtos selecionados
+  };
+
+  const selecionarTodos = () => {
+    if (produtosSelecionados.length === produtos.length) { //se todos os produtos estiverem selecionados
+      setProdutosSelecionados([]);//limpa a lista de produtos selecionados
+    } else {
+      setProdutosSelecionados(produtos.map((produto) => produto.id)); //seleciona todos os produtos
+    }
   };
 
 
@@ -52,20 +60,24 @@ export default function List() {
         onChange={(e) => setNome(e.target.value)} //(parameter) e: React.ChangeEvent<HTMLInputElement>
         onKeyDown={handleKeyDown}
       />
+      <br></br>
       <button onClick={adicionarProduto}>Adicionar</button>
       <button onClick={deletarProdutosSelecionados}>Deletar</button>
+      <button onClick={selecionarTodos}>Selecionar Todos</button>
       <ul>
-        {produtos.map((produto) => (
-          <li key={produto.id}>
-           <input
-              type="checkbox"
-              checked={produtosSelecionados.includes(produto.id)}
-              onChange={() => handleCheckboxChange(produto.id)}
-            />
-            {produto.nome} 
-            </li>
-        ))}
-      </ul>
+  {produtos.map((produto) => (
+    <li key={produto.id}>
+      <input
+        type="checkbox"
+        checked={produtosSelecionados.includes(produto.id)}
+        onChange={() => handleCheckboxChange(produto.id)}
+      />
+      <span style={{ textDecoration: produtosSelecionados.includes(produto.id) ? 'line-through' : 'none' }}>
+            {produto.nome}
+          </span>
+    </li>
+  ))}
+</ul>
     </>
   );
 }
