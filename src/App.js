@@ -11,8 +11,10 @@ export default function List() {
     ordenarProdutos(); // Ordenar os produtos sempre que a lista de produtos for atualizada
   }, [produtos]); // Executar o efeito sempre que a lista de produtos for atualizada
 
+  //verificar se é possível ordenar a lista de produtos sem usar o useEffect
+
   const adicionarProduto = () => {
-    setProdutos([...produtos, { id: nextId++, nome: nome }]); // adiciona os itens na lista
+    setProdutos([...produtos, { id: nextId++, nome: nome, qtde: '1'}]); // adiciona os itens na lista
     setNome(""); // Limpa o campo de entrada depois de adicionar o produto
   };
 
@@ -23,8 +25,8 @@ export default function List() {
   };
 
   const ordenarProdutos = () => {
-    const produtosOrdenados = [...produtos].sort((a, b) => {
-      return a.nome.localeCompare(b.nome);
+    const produtosOrdenados = [...produtos].sort((a, b) => { //cria uma cópia da lista de produtos e ordena os produtos pelo nome
+      return a.nome.localeCompare(b.nome);  //comparação
     });
     setProdutos(produtosOrdenados);
   };
