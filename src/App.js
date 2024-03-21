@@ -65,7 +65,8 @@ export default function List() {
       <br></br>
       <button onClick={adicionarProduto}>Adicionar</button>
       <button onClick={deletarProdutosSelecionados}>Deletar</button>
-      <button onClick={selecionarTodos}>Selecionar Todos</button>
+      <br></br>
+      <input type="checkbox" onChange={selecionarTodos} />Selecionar Todos
       <ul>
   {produtos.map((produto) => (
     <li key={produto.id}>
