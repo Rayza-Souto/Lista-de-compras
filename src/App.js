@@ -58,22 +58,23 @@ export default function List() {
     <>
       <h1>Lista de compras</h1>
       <input
-        value={nome}
-        onChange={(e) => setNome(e.target.value)} //(parameter) e: React.ChangeEvent<HTMLInputElement>
+        className="input"
+        value={nome} //faz o campo de entrada ser controlado pelo estado
+        onChange={(e) => setNome(e.target.value)} 
         onKeyDown={handleKeyDown}
       />
       <br></br>
-      <button onClick={adicionarProduto}>Adicionar</button>
-      <button onClick={deletarProdutosSelecionados}>Deletar</button>
+      <button className="add" onClick={adicionarProduto}>Adicionar</button>
+      <button className="del" onClick={deletarProdutosSelecionados}>Deletar</button>
       <br></br>
-      <input type="checkbox" onChange={selecionarTodos} />Selecionar Todos
+      <input className="selAll" type="checkbox" onChange={selecionarTodos} />Selecionar Todos
       <ul>
-  {produtos.map((produto) => (
+  {produtos.map((produto) => ( 
     <li key={produto.id}>
       <input
         type="checkbox"
-        checked={produtosSelecionados.includes(produto.id)}
-        onChange={() => handleCheckboxChange(produto.id)}
+        checked={produtosSelecionados.includes(produto.id)} 
+        onChange={() => handleCheckboxChange(produto.id)} 
       />
       <span style={{ textDecoration: produtosSelecionados.includes(produto.id) ? 'line-through' : 'none' }}>
             {produto.nome}
