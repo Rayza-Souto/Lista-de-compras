@@ -60,7 +60,7 @@ export default function List() {
       <input
         className="input"
         value={nome} //faz o campo de entrada ser controlado pelo estado
-        onChange={(e) => setNome(e.target.value)} 
+        onChange={(e) => setNome(e.target.value)} //
         onKeyDown={handleKeyDown}
       />
       <br></br>
